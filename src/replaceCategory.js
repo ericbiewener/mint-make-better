@@ -16,8 +16,12 @@ const newCategoryMap = {
 const observer = new MutationObserver((mutationsList, observer) => {
   for (const mutation of mutationsList) {
     for (const node of mutation.addedNodes) {
-      if (oldCategories.some(c => node.textContent.includes(c)))
+      if (node instanceof SVGTSpanElement) {
+        const cat = oldCategories.find(c => node.textContent.includes(c.toUpperCase()))
+        if (cat) node.textContent = newCategoryMap[cat].toUpperCase()
+      } else if (oldCategories.some(c => node.textContent.includes(c))) {
         changeNode(node);
+      }
     }
   }
 });
