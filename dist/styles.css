@@ -1,0 +1,21 @@
+#TxnOfferWidgetContainer {
+  display: none !important;
+}
+
+#menu-category .isL1 {
+  display: none;
+}
+
+#menu-category #menu-category-14,
+#menu-category #menu-category-13,
+#menu-category #menu-category-17,
+#menu-category #menu-category-10,
+#menu-category #menu-category-30,
+#menu-category #menu-category-20,
+#menu-category #menu-category-40 {
+  display: block !important;
+}
+
+.make-better-row-incomplete {
+  background: yellow !important;
+}
