@@ -90,10 +90,23 @@
 /*!***********************************!*\
   !*** ./src/categoryRowStyling.js ***!
   \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("const observer = new MutationObserver((mutationsList, observer) => {\n  for (const mutation of mutationsList) {\n    const { target } = mutation;\n    if (\n      target instanceof HTMLTableCellElement &&\n      target.classList.contains(\"cat\")\n    ) {\n      if (target.textContent.startsWith(\"_\")) {\n        target.parentNode.classList.remove(\"make-better-row-incomplete\");\n      } else {\n        target.parentNode.classList.add(\"make-better-row-incomplete\");\n      }\n    }\n  }\n});\n\nobserver.observe(document.body, { childList: true, subtree: true });\n\n\n//# sourceURL=webpack:///./src/categoryRowStyling.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ \"./src/constants.js\");\n\n\nconst observer = new MutationObserver((mutationsList, observer) => {\n  for (const mutation of mutationsList) {\n    const { target } = mutation;\n    if (\n      target instanceof HTMLTableCellElement &&\n      target.classList.contains(\"cat\")\n    ) {\n      const { textContent } = target\n      const { classList } = target.parentNode\n      \n      if (textContent.startsWith(\"_\")) {\n        classList.remove(\n          \"make-better-row-incomplete\",\n          \"make-better-row-ignored\"\n        );\n      } else {\n        classList.add(\n          textContent.startsWith(\"Hide from Budget\") || textContent === \"Income\"\n            ? \"make-better-row-ignored\"\n            : \"make-better-row-incomplete\"\n        );\n      }\n    }\n  }\n});\n\nobserver.observe(document.body, { childList: true, subtree: true });\n\n\n//# sourceURL=webpack:///./src/categoryRowStyling.js?");
+
+/***/ }),
+
+/***/ "./src/constants.js":
+/*!**************************!*\
+  !*** ./src/constants.js ***!
+  \**************************/
+/*! exports provided: HIDE_CATEGORY */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"HIDE_CATEGORY\", function() { return HIDE_CATEGORY; });\nconst HIDE_CATEGORY = 'Hide from Budgets & Trends'\n\n\n//# sourceURL=webpack:///./src/constants.js?");
 
 /***/ }),
 
@@ -101,10 +114,11 @@ eval("const observer = new MutationObserver((mutationsList, observer) => {\n  fo
 /*!***********************************!*\
   !*** ./src/keyboardNavigation.js ***!
   \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("function findCategoryText(str) {\n  str = str.toLowerCase();\n  if (\"uncategorized\".startsWith(str)) return \"Uncategorized\";\n  if (\"hide\".startsWith(str)) return \"Hide from Budgets & Trends\";\n  for (const node of document.querySelectorAll(\"#menu-category ul ul li\")) {\n    if (node.textContent.toLowerCase().startsWith(str)) return node.textContent;\n  }\n}\n\nfunction clickEl(elOrId) {\n  if (typeof elOrId === \"string\") elOrId = document.getElementById(elOrId);\n  elOrId.dispatchEvent(new Event(\"click\"));\n}\n\ndocument.addEventListener(\"keypress\", e => {\n  if (!e.ctrlKey) return;\n  switch (e.key) {\n    case \"c\":\n      const input = document.getElementById(\"txnEdit-category_input\");\n      let inputVal = \"_\";\n      input.value = inputVal;\n      const valCaptureListener = e => {\n        // Strange that we need to cache the value here. For some reason, `input.value` will be the\n        // original value when we try passing it to `findCategoryText`.\n        inputVal = input.value;\n      };\n\n      const categoryListener = e => {\n        if (e.key !== \"Enter\") return;\n        input.value = findCategoryText(inputVal);\n        input.removeEventListener(\"keydown\", categoryListener);\n        input.removeEventListener(\"keyup\", categoryListener);\n      };\n\n      input.addEventListener(\"keydown\", categoryListener, true); // Must use capture phase to change value before default Enter key functionality\n      input.addEventListener(\"keyup\", valCaptureListener);\n      clickEl(\"txnEdit-category_picker\");\n      break;\n\n    case \"n\":\n      document.getElementById(\"txnEdit-merchant_input\").focus();\n      break;\n\n    case \"s\": {\n      const { scrollY } = window;\n      document.addEventListener(\"scroll\", () => window.scrollTo(0, scrollY), {\n        once: true\n      });\n      document.getElementById(\"txnEdit-createRule\").checked = true;\n      clickEl(\"txnEdit-submit\");\n      break;\n    }\n  }\n});\n\n\n//# sourceURL=webpack:///./src/keyboardNavigation.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ \"./src/constants.js\");\n\n\nfunction findCategoryText(str) {\n  str = str.toLowerCase();\n  if (\"uncategorized\".startsWith(str)) return \"Uncategorized\";\n  if (\"hide\".startsWith(str)) return _constants__WEBPACK_IMPORTED_MODULE_0__[\"HIDE_CATEGORY\"];\n  for (const node of document.querySelectorAll(\"#menu-category ul ul li\")) {\n    if (node.textContent.toLowerCase().startsWith(str)) return node.textContent;\n  }\n}\n\nfunction clickEl(elOrId) {\n  if (typeof elOrId === \"string\") elOrId = document.getElementById(elOrId);\n  elOrId.dispatchEvent(new Event(\"click\"));\n}\n\ndocument.addEventListener(\"keypress\", e => {\n  if (!e.ctrlKey) return;\n  switch (e.key) {\n    case \"c\":\n      const input = document.getElementById(\"txnEdit-category_input\");\n      let inputVal = \"_\";\n      input.value = inputVal;\n      const valCaptureListener = e => {\n        // Strange that we need to cache the value here. For some reason, `input.value` will be the\n        // original value when we try passing it to `findCategoryText`.\n        inputVal = input.value;\n      };\n\n      const categoryListener = e => {\n        if (e.key !== \"Enter\") return;\n        input.value = findCategoryText(inputVal);\n        input.removeEventListener(\"keydown\", categoryListener);\n        input.removeEventListener(\"keyup\", categoryListener);\n      };\n\n      input.addEventListener(\"keydown\", categoryListener, true); // Must use capture phase to change value before default Enter key functionality\n      input.addEventListener(\"keyup\", valCaptureListener);\n      clickEl(\"txnEdit-category_picker\");\n      break;\n\n    case \"n\":\n      document.getElementById(\"txnEdit-merchant_input\").focus();\n      break;\n\n    case \"s\": {\n      const { scrollY } = window;\n      document.addEventListener(\"scroll\", () => window.scrollTo(0, scrollY), {\n        once: true\n      });\n      document.getElementById(\"txnEdit-createRule\").checked = true;\n      clickEl(\"txnEdit-submit\");\n      break;\n    }\n  }\n});\n\n\n//# sourceURL=webpack:///./src/keyboardNavigation.js?");
 
 /***/ }),
 
@@ -116,7 +130,7 @@ eval("function findCategoryText(str) {\n  str = str.toLowerCase();\n  if (\"unca
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _replaceCategory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./replaceCategory */ \"./src/replaceCategory.js\");\n/* harmony import */ var _replaceCategory__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_replaceCategory__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _categoryRowStyling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./categoryRowStyling */ \"./src/categoryRowStyling.js\");\n/* harmony import */ var _categoryRowStyling__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_categoryRowStyling__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _keyboardNavigation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./keyboardNavigation */ \"./src/keyboardNavigation.js\");\n/* harmony import */ var _keyboardNavigation__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_keyboardNavigation__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\n\n//# sourceURL=webpack:///./src/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _replaceCategory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./replaceCategory */ \"./src/replaceCategory.js\");\n/* harmony import */ var _replaceCategory__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_replaceCategory__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _categoryRowStyling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./categoryRowStyling */ \"./src/categoryRowStyling.js\");\n/* harmony import */ var _keyboardNavigation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./keyboardNavigation */ \"./src/keyboardNavigation.js\");\n\n\n\n\n\n//# sourceURL=webpack:///./src/main.js?");
 
 /***/ }),
 

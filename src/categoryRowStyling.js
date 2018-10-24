@@ -1,17 +1,29 @@
+import { HIDE_CATEGORY } from './constants'
+
 const observer = new MutationObserver((mutationsList, observer) => {
   for (const mutation of mutationsList) {
-    const { target } = mutation;
+    const { target } = mutation
     if (
       target instanceof HTMLTableCellElement &&
-      target.classList.contains("cat")
+      target.classList.contains('cat')
     ) {
-      if (target.textContent.startsWith("_")) {
-        target.parentNode.classList.remove("make-better-row-incomplete");
+      const { textContent } = target
+      const { classList } = target.parentNode
+
+      if (textContent.startsWith('_')) {
+        classList.remove(
+          'make-better-row-incomplete',
+          'make-better-row-ignored'
+        )
       } else {
-        target.parentNode.classList.add("make-better-row-incomplete");
+        classList.add(
+          textContent.startsWith('Hide from Budget') || textContent === 'Income'
+            ? 'make-better-row-ignored'
+            : 'make-better-row-incomplete'
+        )
       }
     }
   }
-});
+})
 
-observer.observe(document.body, { childList: true, subtree: true });
+observer.observe(document.body, { childList: true, subtree: true })

@@ -19,3 +19,7 @@
 .make-better-row-incomplete {
   background: yellow !important;
 }
+
+.make-better-row-ignored {
+  background: rgb(255, 255, 210) !important;
+}
