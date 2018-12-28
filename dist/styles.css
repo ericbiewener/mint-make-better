@@ -1,4 +1,4 @@
-#TxnOfferWidgetContainer {
+#TxnOfferWidgetContainer, #TopTxnOfferWidgetContainer {
   display: none !important;
 }
 
