@@ -1,4 +1,8 @@
-#TxnOfferWidgetContainer, #TopTxnOfferWidgetContainer {
+#TxnOfferWidgetContainer,
+#TopTxnOfferWidgetContainer,
+.promotions-personalized-offers-ui,
+.billsWidget,
+.adviceWidget {
   display: none !important;
 }
 
