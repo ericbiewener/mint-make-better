@@ -17,7 +17,7 @@ function clickEl(elOrId) {
 document.addEventListener('keypress', e => {
   if (!e.ctrlKey) return
   switch (e.key) {
-    case 'c':
+    case 'c': {
       const input = document.getElementById('txnEdit-category_input')
       let inputVal = '_'
       input.value = inputVal
@@ -38,6 +38,7 @@ document.addEventListener('keypress', e => {
       input.addEventListener('keyup', valCaptureListener)
       clickEl('txnEdit-category_picker')
       break
+    }
 
     case 'n':
       document.getElementById('txnEdit-merchant_input').focus()
