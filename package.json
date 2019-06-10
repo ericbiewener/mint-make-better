@@ -5,9 +5,9 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^5.7.0",
-    "eslint-config-ericbiewener": "^1.0.13",
-    "webpack": "^4.22.0",
-    "webpack-cli": "^3.1.2"
+    "eslint": "5.16.0",
+    "eslint-config-ericbiewener": "3.6.1",
+    "webpack": "4.33.0",
+    "webpack-cli": "3.3.3"
   }
 }
